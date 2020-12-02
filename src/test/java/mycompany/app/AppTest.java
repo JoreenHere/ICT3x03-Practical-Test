@@ -24,9 +24,7 @@ public class AppTest
 	WebDriver driver; 
 	WebDriverWait wait; 
 	String url = "http://localhost";
-	String validEmail = "user@example.com";
 	String validPassword = "password1234";
-	String invalidEmail = "none@example.com";
 	String invalidPassword = "password";
 
     @Before
@@ -41,44 +39,42 @@ public class AppTest
 	}	 
 	
     @Test
-    public void testLoginWithValidEmailValidPassword() 
+    public void testLoginWithValidPassword() 
 		throws InterruptedException { 
 
 		//get web page
 		driver.get(url);
 		//wait until page is loaded or timeout error
-		wait.until(ExpectedConditions.titleContains("Login Page |")); 
+		wait.until(ExpectedConditions.titleContains("Home Page |")); 
 
 		//enter input
-		driver.findElement(By.name("email")).sendKeys(validEmail);
-		driver.findElement(By.name("password")).sendKeys(validPassword);
+		driver.findElement(By.name("pwd")).sendKeys(validPassword);
 		//click submit
 		driver.findElement(By.name("submit")).submit();
 	
 		//check result 
-		String expectedResult = "Dashboard |"; 
+		String expectedResult = "Welcome"; 
 		boolean isResultCorrect = wait.until(ExpectedConditions.titleContains(expectedResult)); 
 		assertTrue(isResultCorrect == true); 
 	}
 		
 	@Test
-    public void testLoginWithValidEmailInvalidPassword() 
+    public void testLoginWithInvalidPassword() 
 		throws InterruptedException { 
 
 		//get web page
 		driver.get(url);
 		//wait until page is loaded or timeout error
-		wait.until(ExpectedConditions.titleContains("Login Page |")); 
+		wait.until(ExpectedConditions.titleContains("Home Page |")); 
 
 		//enter input
-		driver.findElement(By.name("email")).sendKeys(validEmail);
 		driver.findElement(By.name("password")).sendKeys(invalidPassword);
 		//click submit
 		driver.findElement(By.name("submit")).submit();
 	
 		//check result
 		By errorMsgId = By.className("error-msg");
-		String expectedResult = "Login failed"; 
+		String expectedResult = "Password does not meet requirements"; 
 		boolean isResultCorrect = wait.until(ExpectedConditions.textToBe(errorMsgId, expectedResult)); 
 		assertTrue(isResultCorrect == true); 
 	}
