@@ -45,7 +45,7 @@ public class AppTest
 		//get web page
 		driver.get(url);
 		//wait until page is loaded or timeout error
-		wait.until(ExpectedConditions.titleContains("Home Page |")); 
+		wait.until(ExpectedConditions.titleContains("Home Page")); 
 
 		//enter input
 		driver.findElement(By.name("pwd")).sendKeys(validPassword);
